@@ -1,0 +1,36 @@
+.course-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
+    /* display: grid;
+    column-gap: minmax(0.5%, 20%);
+    grid-template-columns: repeat(auto-fill, 20rem); */
+    /* grid-template-columns: fit-content(10%); */
+    /* margin: 0% 0.5%; */
+    /* row-gap: 0.5rem; */
+    width: 100%;
+}
+
+.course-card {
+    border: 1px solid #aaaaaa;
+    border-radius: 0.4rem;
+    padding: 1rem;
+    width: 14rem;
+    /* font-size: 1rem; */
+}
+
+.course-card-top {
+    height: 5rem;
+}
+
+.course-term-number {
+    font-size: 1.5rem;
+}
+
+.course-card-bottom {
+    border-top: 1px solid #aaaaaa;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+}
