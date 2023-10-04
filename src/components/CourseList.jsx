@@ -1,8 +1,8 @@
 import './CourseList.css'
 
-const CourseList = ({courses}) => (
+const CourseList = ({courses, selection}) => (
     <div className="course-list">
-        { Object.values(courses).map(id => (
+        { Object.values(courses).filter(item => (item.term == selection)).map(id => (
             <div className="course-card" key={id}>
                 <div className="course-term-number"> {id.term} CS {id.number} </div>
                 <div className='course-card-top'>
