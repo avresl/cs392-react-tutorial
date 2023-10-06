@@ -1,21 +1,19 @@
 import './CourseList.css'
-import { useState } from 'react';
 
-const CourseList = ({courses, selection}) => {
-    const [selected, setSelected] = useState([]);
+const CourseList = ({courses, selection, selectedCourses, setSelectedCourses}) => {
 
-    const toggleSelected = (item) => setSelected(
-        selected.includes(item)
-        ? selected.filter(x => x !== item)
-        : [...selected, item]
+    const toggleSelectedCourses = (item) => setSelectedCourses(
+        selectedCourses.includes(item)
+        ? selectedCourses.filter(x => x !== item)
+        : [...selectedCourses, item]
     );
 
-    const isSelected = (item) => (selected.includes(item));
+    const isSelected = (item) => (selectedCourses.includes(item));
 
     return (
         <div className="course-list">
             { Object.values(courses).filter(item => (item.term == selection)).map(id => (
-                <div className={ isSelected(id) ? "course-card-selected" : "course-card"} key={id} onClick={() => toggleSelected(id)}>
+                <div className={ isSelected(id) ? "course-card-selected" : "course-card"} key={[id.term,id.number].join('-')} onClick={() => toggleSelectedCourses(id)}>
                     <div className="course-term-number"> {id.term} CS {id.number} </div>
                     <div className='course-card-top'>
                         {id.title}

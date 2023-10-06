@@ -9,7 +9,7 @@ const TermButton = ({term, selection, setSelection}) => (
 );
 
 const TermSelector = ({terms, selection, setSelection}) => (
-    <div className="btn-group">
+    <div className="btn-group me-auto">
       { 
         Object.keys(terms).map(term => <TermButton key={term} term={term} selection={selection} setSelection={setSelection} />)
       }
