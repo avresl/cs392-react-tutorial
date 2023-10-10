@@ -14,7 +14,7 @@
 }
 
 .course-card {
-    border: 1px solid #aaaaaa;
+    border: 1px solid #aaa;
     border-radius: 0.4rem;
     padding: 1rem;
     width: 14rem;
@@ -25,6 +25,15 @@
     border: 1px solid #dd6;
     border-radius: 0.4rem;
     background-color: #ffffdd;
+    padding: 1rem;
+    width: 14rem;
+    /* font-size: 1rem; */
+}
+
+.course-card-conflicting {
+    border: 1px solid #d99;
+    border-radius: 0.4rem;
+    background-color: #ffdddd;
     padding: 1rem;
     width: 14rem;
     /* font-size: 1rem; */
