@@ -1,5 +1,8 @@
 import './CourseList.css'
 import { isConflicting } from '../utilities/time-filter';
+import { Link } from 'react-router-dom';
+
+{/* <i className="bi bi-pencil"></i> */}
 
 const CourseList = ({courses, selection, selectedCourses, setSelectedCourses}) => {
 
@@ -19,7 +22,10 @@ const CourseList = ({courses, selection, selectedCourses, setSelectedCourses}) =
                     key={[id.term,id.number].join('-')}
                     onClick={() => toggleSelectedCourses(id)}
                 >
-                    <div className="course-term-number"> {id.term} CS {id.number} </div>
+                    <div className='d-flex'>
+                        <div className="me-auto course-term-number"> {id.term} CS {id.number}</div>
+                        <Link className="ms-auto" to={`/${[id.term,id.number].join('-')}/edit`}>edit</Link>
+                    </div>
                     <div className='course-card-top'>
                         {id.title}
                     </div>

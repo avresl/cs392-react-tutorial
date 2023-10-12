@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Banner from "./components/Banner";
-import TermPage from "./components/TermPage";
+import Dispatcher from "./components/Dispatcher";
 import { useJsonQuery } from "./utilities/fetch";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -46,7 +46,7 @@ const Main = () => {
   return (
     <>
       <Banner title={schedule.title}/>
-      <TermPage courses={schedule.courses}/>
+      <Dispatcher courses={schedule.courses}/>
     </>
   )
 }
