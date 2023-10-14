@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './CourseList.css'
 import { isConflicting } from '../utilities/time-filter';
 import { Link } from 'react-router-dom';

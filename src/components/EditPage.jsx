@@ -1,14 +1,26 @@
-import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useFormData } from "../utilities/useFormData";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+const validateCourseData = (key, val) => {
+    switch (key) {
+      case 'title':
+        return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
+      case 'meets':
+        return /^((M?(Tu)?W?(Th)?F?){1}\s[01]\d:[0-5]\d-[01]\d:[0-5]\d)?$/.test(val) ? '' : 'must contain days of the week and a time range or be empty, ex: MWF 11:00-11:50';
+      default: return '';
+    }
+  };
 
 const InputField = ({name, text, state, change}) => (
     <div className="mb-3">
       <label htmlFor={name} className="form-label">{text}</label>
       <input className="form-control" id={name} name={name} 
-        defaultValue={state} onChange={change} />
-      <div className="invalid-feedback">{''}</div>
+        defaultValue={state.values?.[name]} onChange={change} />
+      <div>{state.errors?.[name]}</div>
     </div>
-);
+); // className="invalid-feedback"
 
 const ButtonBar = ({message, disabled}) => {
     const navigate = useNavigate();
@@ -24,13 +36,14 @@ const ButtonBar = ({message, disabled}) => {
 const EditPage = ({courses}) => {
     const params = useParams().id.split('-');
     const course = Object.values(courses).filter((i) => (i.term === params[0] && i.number === params[1]))[0];
-    const [title, setTitle] = useState(course.title);
-    const [meets, setMeets] = useState(course.meets);
+    // const [title, setTitle] = useState(course.title);
+    // const [meets, setMeets] = useState(course.meets);
+    const [state, change] = useFormData(validateCourseData, course);
 
     return (
         <form onSubmit={() => {}} noValidate>
-            <InputField name="title" text="Course Title" state={title} change={setTitle} />
-            <InputField name="meets" text="Course Meets" state={meets} change={setMeets} />
+            <InputField name="title" text="Course Title" state={state} change={change} />
+            <InputField name="meets" text="Course Meets" state={state} change={change} />
             <ButtonBar message={''} />
         </form>
     )
