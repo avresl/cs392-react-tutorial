@@ -3,6 +3,7 @@ import Banner from "./components/Banner";
 import Dispatcher from "./components/Dispatcher";
 import { useJsonQuery } from "./utilities/fetch";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useDbData } from './utilities/firebase';
 
 // const schedule = {
 //   "title": "CS Courses for 2018-2019",
@@ -37,16 +38,17 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
 const Main = () => {
-  const [schedule, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+  // const [schedule, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+  const [data, error] = useDbData('/');
 
   if (error) return <h1>Error loading course data: {`${error}`}</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
-  if (!schedule) return <h1>No CS courses for 2018-2019 found</h1>;
+  // if (!isLoading) return <h1>Loading...</h1>;
+  if (!data) return <h1>No CS courses for 2018-2019 found</h1>;
 
   return (
     <>
-      <Banner title={schedule.title}/>
-      <Dispatcher courses={schedule.courses}/>
+      <Banner title={data.title}/>
+      <Dispatcher courses={data.courses}/>
     </>
   )
 }
