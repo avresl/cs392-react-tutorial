@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useDbUpdate } from '../utilities/firebase';
 import { useFormData } from "../utilities/useFormData";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +19,7 @@ const InputField = ({name, text, state, change}) => (
       <label htmlFor={name} className="form-label">{text}</label>
       <input className="form-control" id={name} name={name} 
         defaultValue={state.values?.[name]} onChange={change} />
-      <div>{state.errors?.[name]}</div>
+      <div className="invalid-feedback">{state.errors?.[name]}</div>
     </div>
 ); // className="invalid-feedback"
 
@@ -34,17 +35,24 @@ const ButtonBar = ({message, disabled}) => {
 };
 
 const EditPage = ({courses}) => {
-    const params = useParams().id.split('-');
-    const course = Object.values(courses).filter((i) => (i.term === params[0] && i.number === params[1]))[0];
+    const params = useParams().id;
+    const [update, result] = useDbUpdate(`/courses/${params}`);
+    const course = Object.values(courses).filter((i) => (i.term.substring(0,1) === params.substring(0,1) && i.number === params.substring(1,params.length)))[0];
     // const [title, setTitle] = useState(course.title);
     // const [meets, setMeets] = useState(course.meets);
     const [state, change] = useFormData(validateCourseData, course);
+    const submit = (evt) => {
+      evt.preventDefault();
+      if (!state.errors) {
+        update(state.values);
+      }
+    };
 
     return (
-        <form onSubmit={() => {}} noValidate>
+        <form onSubmit={submit} noValidate className={state.errors ? 'was-validated' : null}>
             <InputField name="title" text="Course Title" state={state} change={change} />
             <InputField name="meets" text="Course Meets" state={state} change={change} />
-            <ButtonBar message={''} />
+            <ButtonBar message={result?.message} />
         </form>
     )
 
