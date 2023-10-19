@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Banner from "./components/Banner";
 import Dispatcher from "./components/Dispatcher";
+import Navigation from './components/Navigation';
 import { useJsonQuery } from "./utilities/fetch";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useDbData } from './utilities/firebase';
@@ -47,6 +48,7 @@ const Main = () => {
 
   return (
     <>
+      <Navigation />
       <Banner title={data.title}/>
       <Dispatcher courses={data.courses}/>
     </>
