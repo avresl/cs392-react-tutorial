@@ -11,7 +11,7 @@ const terms = {
     Spring: 'Spring Courses'
 };
 
-const TermPage = ({courses}) => {
+const TermPage = ({profile, courses}) => {
     const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
     const [modalOpen, setModalOpen] = useState(false);
     const [selectedCourses, setSelectedCourses] = useState([]);
@@ -23,7 +23,7 @@ const TermPage = ({courses}) => {
                 <CoursePlanButton openModal={() => setModalOpen(true)}/>
             </div>
             <Modal children={<CoursePlan selected={selectedCourses}/>} open={modalOpen} close={() => setModalOpen(false)}/>
-            <CourseList courses={courses} selection={selection} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>
+            <CourseList profile={profile} courses={courses} selection={selection} selectedCourses={selectedCourses} setSelectedCourses={setSelectedCourses}/>
         </>
     )
 }
