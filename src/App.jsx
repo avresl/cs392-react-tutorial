@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter } from "react-router-dom";
 import Banner from "./components/Banner";
 import Dispatcher from "./components/Dispatcher";
 import Navigation from './components/Navigation';
@@ -47,11 +48,11 @@ const Main = () => {
   if (!data) return <h1>No CS courses for 2018-2019 found</h1>;
 
   return (
-    <>
+    <BrowserRouter>
       <Navigation />
       <Banner title={data.title}/>
       <Dispatcher courses={data.courses}/>
-    </>
+    </BrowserRouter>
   )
 }
 
