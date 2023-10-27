@@ -28,6 +28,7 @@ const CourseList = ({profile, courses, selection, selectedCourses, setSelectedCo
             { Object.values(courses).filter(item => (item.term == selection)).map(id => (
                 <div
                     className={ isSelected(id) ? "course-card-selected" : (isConflicting(selectedCourses, id) ? "course-card-conflicting" : "course-card")}
+                    data-cy="course"
                     key={[id.term,id.number].join('-')}
                     onClick={() => toggleSelectedCourses(id)}
                 >
